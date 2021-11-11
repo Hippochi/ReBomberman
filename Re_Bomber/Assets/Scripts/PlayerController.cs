@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float playerSpeed = 5f;
+    public float playerSpeed = 7f;
+    public int playerLives = 3;
 
     private int bombs = 2;
 
@@ -14,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     private Transform playerTransform;
     private bool canBomb = true;
+    private bool canTele = true;
+    private bool canDie = true;
+    private float teleCD = 120;
+    private float DamageCD = 400;
 
     void Start()
     {
@@ -25,29 +30,30 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateMove();
+        Timer();
     }
 
     private void UpdateMove()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A)|| Input.GetAxis("Horizontal") < -0.3f)
         { //move left
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, playerSpeed);
 
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -0.3f)
         { //move down
             rigidbody.velocity = new Vector3(-playerSpeed, rigidbody.velocity.y, rigidbody.velocity.z);
 
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.3f)
         { //move right
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, -playerSpeed);
 
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W)|| Input.GetAxis("Vertical") > 0.3f)
         { //move up
             rigidbody.velocity = new Vector3(playerSpeed, rigidbody.velocity.y, rigidbody.velocity.z);
 
@@ -64,10 +70,12 @@ public class PlayerController : MonoBehaviour
 
     private void DropBomb()
     {
-        Instantiate(liveBomb, new Vector3(Mathf.RoundToInt(playerTransform.position.x),
- liveBomb.transform.position.y, Mathf.RoundToInt(playerTransform.position.z)),
- liveBomb.transform.rotation);
-
+        if (bombs > 0)
+        {
+            Instantiate(liveBomb, new Vector3(Mathf.RoundToInt(playerTransform.position.x),
+            liveBomb.transform.position.y, Mathf.RoundToInt(playerTransform.position.z)),
+            liveBomb.transform.rotation);
+        }
 
     }
 
@@ -76,6 +84,57 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "SafeTile")
         {
             canBomb = true;
+        }
+
+    }
+    void Timer()
+    {
+        if (canTele == false)
+        {
+            teleCD--;
+            if (teleCD < 0)
+            {
+                teleCD = 120;
+                canTele = true;
+            }
+        }
+
+        if (canDie == false)
+        {
+            DamageCD--;
+            if (DamageCD < 0)
+            {
+                DamageCD = 400;
+                canDie = true;
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (canTele == true)
+        {
+            if (col.gameObject.tag == "Teleporter")
+            {
+                Debug.Log("");
+                playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z + 10);
+
+                canTele = false;
+            }
+            if (col.gameObject.tag == "TeleporterB")
+            {
+                Debug.Log("");
+                playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z - 10);
+                canTele = false;
+            }
+
+        }
+
+        if (col.gameObject.tag == "Explosion")
+        {
+            if (canDie == true) { playerLives--; }
+            Debug.Log(playerLives);
+            canDie = false;
         }
     }
 }

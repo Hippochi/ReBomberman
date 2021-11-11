@@ -7,6 +7,7 @@ public class BlockBehaviour : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Material RedMat;
     private Material GreenMat;
+    private bool alreadyUsed;
 
     void Start()
     {
@@ -56,30 +57,46 @@ public class BlockBehaviour : MonoBehaviour
         }
         if (gameObject.tag == "AdjacentDeath")
         {
+            
             StartCoroutine(DangerTile());
         }
+        
     }
 
     IEnumerator DangerTile()
     {
+        alreadyUsed = true;
         gameObject.tag = "SafeTile";
-        meshRenderer.material = RedMat;
-
         yield return new WaitForSecondsRealtime(3f);
 
-        meshRenderer.material = GreenMat;
+        //meshRenderer.material = GreenMat;
+        alreadyUsed = false;
+    }
 
-
+    IEnumerator TileHasBeenUsed()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+       
     }
 
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag == "Explosion")
+        
+        if (col.gameObject.tag == "Bomb")
         {
             gameObject.tag = "DeathTile";
+
+            if (alreadyUsed == true)
+            {
+
+            }
         }
 
+
+        StartCoroutine(TileHasBeenUsed());
     }
+
+
 
     
 }

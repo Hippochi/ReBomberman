@@ -18,6 +18,7 @@ public class BombBehaviour: MonoBehaviour
 
     void Explode()
     {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         GetComponent<MeshRenderer>().enabled = false;
         //transform.Find("Collider").gameObject.SetActive(false);
         Destroy(gameObject, 0.3f);

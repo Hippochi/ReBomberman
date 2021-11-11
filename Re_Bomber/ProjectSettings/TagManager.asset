@@ -9,6 +9,8 @@ TagManager:
   - Bomb
   - Explosion
   - AdjacentDeath
+  - Teleporter
+  - TeleporterB
   layers:
   - Default
   - TransparentFX
