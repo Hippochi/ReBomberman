@@ -322,6 +322,7 @@
 "Assets/Scripts/BlockBehaviour.cs"
 "Assets/Scripts/BombBehaviour.cs"
 "Assets/Scripts/EnemyController.cs"
+"Assets/Scripts/ExplosionBehaviour.cs"
 "Assets/Scripts/LevelLoader.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/RandomSpawner.cs"

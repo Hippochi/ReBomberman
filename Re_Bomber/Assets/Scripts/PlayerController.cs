@@ -114,17 +114,17 @@ public class PlayerController : MonoBehaviour
     {
         if (canTele == true)
         {
-            if (col.gameObject.tag == "Teleporter")
+            if (col.gameObject.name == "TeleporterPadA")
             {
                 Debug.Log("");
-                playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z + 10);
+                playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z + 11);
 
                 canTele = false;
             }
-            if (col.gameObject.tag == "TeleporterB")
+            if (col.gameObject.name == "TeleporterPadB")
             {
                 Debug.Log("");
-                playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z - 10);
+                playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z - 11);
                 canTele = false;
             }
 

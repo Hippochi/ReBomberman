@@ -8,6 +8,7 @@ public class BlockBehaviour : MonoBehaviour
     private Material RedMat;
     private Material GreenMat;
     private bool alreadyUsed;
+    private bool forceRed;
 
     void Start()
     {
@@ -18,8 +19,17 @@ public class BlockBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (forceRed == true)
+        {
+            meshRenderer.material = RedMat;
+        }
+
         if (gameObject.tag == "DeathTile")
         {
+            if (alreadyUsed == true)
+            {
+                StartCoroutine(TileHasBeenUsed());
+            }
             StartCoroutine(DangerTile());
 
             Collider[] colliders;
@@ -29,7 +39,6 @@ public class BlockBehaviour : MonoBehaviour
                 {
                     var go = collider.gameObject;
                     if (go == gameObject) continue;
-
                     go.tag = "AdjacentDeath";
                 }
             }
@@ -57,7 +66,10 @@ public class BlockBehaviour : MonoBehaviour
         }
         if (gameObject.tag == "AdjacentDeath")
         {
-            
+            if (alreadyUsed == true)
+            {
+                StartCoroutine(TileHasBeenUsed());
+            }
             StartCoroutine(DangerTile());
         }
         
@@ -66,17 +78,19 @@ public class BlockBehaviour : MonoBehaviour
     IEnumerator DangerTile()
     {
         alreadyUsed = true;
+        meshRenderer.material = RedMat;
         gameObject.tag = "SafeTile";
         yield return new WaitForSecondsRealtime(3f);
 
-        //meshRenderer.material = GreenMat;
+        meshRenderer.material = GreenMat;
         alreadyUsed = false;
     }
 
     IEnumerator TileHasBeenUsed()
     {
+        forceRed = true;
         yield return new WaitForSecondsRealtime(3f);
-       
+        forceRed = false;
     }
 
     void OnCollisionEnter(Collision col)
@@ -85,15 +99,9 @@ public class BlockBehaviour : MonoBehaviour
         if (col.gameObject.tag == "Bomb")
         {
             gameObject.tag = "DeathTile";
-
-            if (alreadyUsed == true)
-            {
-
-            }
         }
+        
 
-
-        StartCoroutine(TileHasBeenUsed());
     }
 
 
