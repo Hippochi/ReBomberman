@@ -1,6 +1,3 @@
-//LevelLoader by Alex Dine
-//Scene loader, basic logic
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +10,10 @@ public class LevelLoader : MonoBehaviour
 
     void Update()
     {
-        /*if (FindObjectsOfType<PlayerController>().Length == 1)
+        if (FindObjectsOfType<PlayerController>().Length == 1)
         {
-            if (FindObjectOfType<PlayerController>().lives <= 0) { GameOver(); }
-        }*/
+            if (FindObjectOfType<PlayerController>().playerLives <= 0) { GameOver(); }
+        }
 
     }
     public void StartMenu()
@@ -33,8 +30,8 @@ public class LevelLoader : MonoBehaviour
     //starts a new game session and loads game scene
     public void LoadGame()
     {
-        //StartCoroutine(PlayDelay());
-        SceneManager.LoadScene("PlayScene");
+        StartCoroutine(PlayDelay());
+        
     }
 
     public void GameOver()
@@ -62,7 +59,7 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene("HowToScene");
     }
 
-    /*private IEnumerator PlayDelay()
+    private IEnumerator PlayDelay()
     {
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("PlayScene");
@@ -71,5 +68,5 @@ public class LevelLoader : MonoBehaviour
         {
             Destroy(FindObjectOfType<ScoreCounter>().gameObject);
         }
-    }*/
+    }
 }

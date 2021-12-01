@@ -6,11 +6,14 @@ public class PlayerController : MonoBehaviour
 {
 
     public float playerSpeed = 7f;
-    public int playerLives = 3;
+    public int playerLives;
 
     private int bombs = 2;
 
     public GameObject liveBomb;
+    public GameObject life1;
+    public GameObject life2;
+    public GameObject life3;
 
     private Rigidbody rigidbody;
     private Transform playerTransform;
@@ -24,6 +27,10 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         playerTransform = GetComponent<Transform>();
+        playerLives = 3;
+        life1.SetActive(true);
+        life2.SetActive(true);
+        life3.SetActive(true);
     }
 
 
@@ -31,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMove();
         Timer();
+        LifeCheck();
     }
 
     private void UpdateMove()
@@ -40,20 +48,18 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, playerSpeed);
 
         }
+        else if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.3f)
+        { //move right
+            rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, -playerSpeed);
+
+        }
 
         if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < -0.3f)
         { //move down
             rigidbody.velocity = new Vector3(-playerSpeed, rigidbody.velocity.y, rigidbody.velocity.z);
 
         }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0.3f)
-        { //move right
-            rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, -playerSpeed);
-
-        }
-
-        if (Input.GetKey(KeyCode.W)|| Input.GetAxis("Vertical") > 0.3f)
+        else if (Input.GetKey(KeyCode.W) || Input.GetAxis("Vertical") > 0.3f)
         { //move up
             rigidbody.velocity = new Vector3(playerSpeed, rigidbody.velocity.y, rigidbody.velocity.z);
 
@@ -110,7 +116,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
+    void LifeCheck()
+    {
+        if (playerLives <= 2)
+        {
+            life3.SetActive(false);
+        }
+
+        if (playerLives <= 1)
+        {
+            life2.SetActive(false);
+        }
+
+        if (playerLives <= 0)
+        {
+            life1.SetActive(false);
+        }
+    }
+
+
+void OnTriggerEnter(Collider col)
     {
         if (canTele == true)
         {

@@ -491,8 +491,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -303.5194, y: 1.8303}
-  m_SizeDelta: {x: 536.9612, y: 902.3395}
+  m_AnchoredPosition: {x: 0, y: 1.8303}
+  m_SizeDelta: {x: 1000, y: 902.3395}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568804001
 MonoBehaviour:
@@ -514,7 +514,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MOVE with W A S D
+  m_text: "Keyboard controls:\nMOVE with W A S D \nPress Space to drop a Bomb\n\nInstructions:\nEnemies
+    spawn randomly, beware\nTeleporter in the middle can help \nbombs affect both
+    sides!!\n3 lives and you're out! Survive!\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e023852cd88a6694ca0973769bfa27c8, type: 2}
   m_sharedMaterial: {fileID: -7219000588814521574, guid: e023852cd88a6694ca0973769bfa27c8, type: 2}

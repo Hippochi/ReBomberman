@@ -3,6 +3,7 @@
 -a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\Unity.Timeline.dll"
 -a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\Unity.TextMeshPro.dll"
 -a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\Unity.VisualScripting.Flow.dll"
+-a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\Unity.InputSystem.dll"
 -a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\UnityEngine.UI.dll"
 -a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\Unity.VisualScripting.State.dll"
 -a="H:\School work\Production\ReBomberman\Re_Bomber\Library\PlayerScriptAssemblies\Unity.VisualScripting.Core.dll"
