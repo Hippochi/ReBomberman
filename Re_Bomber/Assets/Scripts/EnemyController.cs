@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public float enemySpeed = 7f;
 
     private int bombs = 60;
-    private int bombsCD = 120;
+    private int bombsCD = 80;
     public GameObject liveBomb;
 
     private Rigidbody rigidbody;
@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
         bombsCD--;
         if (bombsCD == 0)
         { 
-            bombsCD = 120;
+            bombsCD = 80;
             canBomb = true;
         }
         Move();

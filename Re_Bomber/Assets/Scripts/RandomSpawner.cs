@@ -18,7 +18,7 @@ public class RandomSpawner : MonoBehaviour
     {
         if (timeToSpawn == true)
         {
-            Invoke("Spawn", 3f);
+            Invoke("Spawn", 1.5f);
             timeToSpawn = false;
         }
     }
