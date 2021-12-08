@@ -5,6 +5,7 @@ using UnityEngine;
 public class RandomSpawner : MonoBehaviour
 {
     bool timeToSpawn;
+    private float VariableSpawnRate;
     private bool leftOrRight;
     public GameObject Enemy;
     Vector3 position;
@@ -12,13 +13,14 @@ public class RandomSpawner : MonoBehaviour
     void Start()
     {
         timeToSpawn = true;
+        VariableSpawnRate = 4.0f;
     }
     // Update is called once per frame
     void Update()
     {
         if (timeToSpawn == true)
         {
-            Invoke("Spawn", 1.5f);
+            Invoke("Spawn", VariableSpawnRate);
             timeToSpawn = false;
         }
     }
@@ -43,7 +45,8 @@ public class RandomSpawner : MonoBehaviour
         position.y = 0.5f;
 
         Instantiate(Enemy, position, Quaternion.identity);
-
+        if (VariableSpawnRate > 0.4f)
+        VariableSpawnRate -= 0.2f;
         timeToSpawn = true;
     }
 }

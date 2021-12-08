@@ -6,10 +6,10 @@ using System;
 public class EnemyController : MonoBehaviour
 {
 
-    public float enemySpeed = 7f;
+    public float enemySpeed = 7.5f;
 
-    private int bombs = 60;
-    private int bombsCD = 80;
+    private int bombs = 30;
+    private int bombsCD = 50;
     public GameObject liveBomb;
 
     private Rigidbody rigidbody;
@@ -118,8 +118,15 @@ public class EnemyController : MonoBehaviour
     {
         if (col.gameObject.tag == "Explosion")
         {
-            Destroy(enemyTransform.root.gameObject);
+            this.GetComponent<AudioSource>().Play(0);
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            canBomb = false;
+            bombs = 20000;
+            bombsCD = 20000;
+            Destroy(enemyTransform.root.gameObject, 0.5f);
             ScoreCounter.instance.curScore += 10;
+            
 
         }
     }

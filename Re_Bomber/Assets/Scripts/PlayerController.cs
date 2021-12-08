@@ -157,6 +157,7 @@ void OnTriggerEnter(Collider col)
 
         if (col.gameObject.tag == "Explosion")
         {
+            this.GetComponent<AudioSource>().Play(0);
             if (canDie == true) { playerLives--; }
             Debug.Log(playerLives);
             canDie = false;

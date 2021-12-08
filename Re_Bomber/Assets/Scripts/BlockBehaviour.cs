@@ -13,7 +13,7 @@ public class BlockBehaviour : MonoBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        RedMat = meshRenderer.materials[1];
+        //RedMat = meshRenderer.materials[1];
         GreenMat = meshRenderer.materials[0];
     }
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class BlockBehaviour : MonoBehaviour
     {
         if (forceRed == true)
         {
-            meshRenderer.material = RedMat;
+           // meshRenderer.material = RedMat;
         }
 
         if (gameObject.tag == "DeathTile")
@@ -78,7 +78,7 @@ public class BlockBehaviour : MonoBehaviour
     IEnumerator DangerTile()
     {
         alreadyUsed = true;
-        meshRenderer.material = RedMat;
+       // meshRenderer.material = RedMat;
         gameObject.tag = "SafeTile";
         yield return new WaitForSecondsRealtime(3f);
 
